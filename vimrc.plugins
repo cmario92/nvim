@@ -10,6 +10,9 @@ Plug 'Shougo/vimproc.vim', {'do': 'make'}
 " Plugins: Vim Repeat on steroids
 Plug 'tpope/vim-repeat'
 
+" Plugins: themes
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
+Plug 'chriskempson/base16-vim'
 
 " Plugins: Airline -----------------------------------------------------------
 Plug 'vim-airline/vim-airline'
