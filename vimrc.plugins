@@ -10,9 +10,13 @@ Plug 'Shougo/vimproc.vim', {'do': 'make'}
 " Plugins: Vim Repeat on steroids
 Plug 'tpope/vim-repeat'
 
+" Plugins: Floaterm
+Plug 'voldikss/vim-floaterm'
+
 " Plugins: themes
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'chriskempson/base16-vim'
+Plug 'ghifarit53/tokyonight-vim'
 
 " Plugins: Airline -----------------------------------------------------------
 Plug 'vim-airline/vim-airline'
@@ -51,14 +55,18 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Plugins: NerdTree Tabs -----------------------------------------------------
 Plug 'jistr/vim-nerdtree-tabs'
 
+ " Plugins: fzf --------------------------------------------------------------
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
 " Ctrl-P to Display the file browser tree
+nmap <C-P> :NERDTreeTabsToggle<CR>
 nmap <C-P> :NERDTreeTabsToggle<CR>
 
 " ,p to show current file in the tree
 nmap <leader>p :NERDTreeFind<CR>
 
 " Plugins: nerdcommenter -----------------------------------------------------
-
 Plug 'scrooloose/nerdcommenter'
 
 let g:NERDSpaceDelims=1

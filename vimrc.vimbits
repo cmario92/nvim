@@ -1,7 +1,4 @@
 " plugin: vimbits ------------------------------------------------------------
-
-" awesome stuff from vimbits.com
-
 " keep selection after in/outdent
 vnoremap < <gv
 vnoremap > >gv
@@ -22,9 +19,6 @@ nnoremap #   #zz
 nnoremap g*  g*zz
 nnoremap g#  g#z
 
-" disable paste mode when leaving Insert Mode
-au InsertLeave * set nopaste
-
 " fast expand current file's directory in command mode
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 cnoremap %^ <C-R>=expand('%:p:h').'/'<cr>
@@ -38,6 +32,12 @@ nnoremap <Leader>Yp :let @*=expand("%")<cr>:echo "Copied file path to clipboard"
 nnoremap <Leader>Yf :let @*=expand("%:t")<cr>:echo "Copied file name to clipboard"<cr>
 " Copy current buffer path without filename to system clipboard
 nnoremap <Leader>Yd :let @*=expand("%:h")<cr>:echo "Copied file directory to clipboard"<cr>
-
 " keep at least  5 lines above/below cursor (when scrolling)
+
+"'' Floatterm ''"
+if filereadable(expand("~/.config/nvim/plugged/vim-floaterm/plugin/floaterm.vim"))
+  nnoremap <leader>fl :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating lazygit<CR>
+  nnoremap <leader>ft :FloatermNew --autoclose=2 --height=0.75 --width=0.75 --wintype=floating<CR>
+endif
+
 set scrolloff=5

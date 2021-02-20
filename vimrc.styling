@@ -9,7 +9,8 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
 
 set termguicolors
 set background=dark
-colorscheme onehalfdark
+colorscheme tokyonight
+let g:tokyonight_style = 'night' " available: night, storm
 
 " Plugin: onehalfdark
 syntax on
