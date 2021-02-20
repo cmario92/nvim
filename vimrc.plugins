@@ -36,15 +36,27 @@ set noshowmode
 " Plugins: Theme
 Plug 'chriskempson/vim-tomorrow-theme'
 
+" Plugins: vim-devicons-------------------------------------------------------
+Plug 'ryanoasis/vim-devicons'
+" loading the plugin
+let g:webdevicons_enable = 1
+" adding the flags to NERDTree
+let g:webdevicons_enable_nerdtree = 1
+" adding to vim-airline's tabline
+let g:webdevicons_enable_airline_tabline = 1
+" adding to vim-airline's statusline
+let g:webdevicons_enable_airline_statusline = 1
+
+
 " Plugins: Indent Guides -----------------------------------------------------
-Plug 'vim-scripts/Indent-Guides'
-colorscheme default
+" Plug 'vim-scripts/Indent-Guides'
+" colorscheme default
 
 " indent-guides settings
-let g:indent_guides_start_level = 2
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_guide_size = 1
-let g:indent_guides_color_change_percent = 5
+" let g:indent_guides_start_level = 2
+" let g:indent_guides_enable_on_vim_startup = 1
+" let g:indent_guides_guide_size = 1
+" let g:indent_guides_color_change_percent = 5
 
 " Plugins: NerdTree base -----------------------------------------------------
 Plug 'scrooloose/nerdtree'
