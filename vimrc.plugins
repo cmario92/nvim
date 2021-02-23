@@ -47,6 +47,10 @@ let g:webdevicons_enable_airline_tabline = 1
 " adding to vim-airline's statusline
 let g:webdevicons_enable_airline_statusline = 1
 
+" Ctrl-P to Display the file browser tree
+nmap <C-P> :NERDTreeTabsToggle<CR>
+" ,p to show current file in the tree
+nmap <leader>p :NERDTreeFind<CR>
 
 " Plugins: Indent Guides -----------------------------------------------------
 " Plug 'vim-scripts/Indent-Guides'
@@ -70,14 +74,6 @@ Plug 'jistr/vim-nerdtree-tabs'
  " Plugins: fzf --------------------------------------------------------------
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-
-" Ctrl-P to Display the file browser tree
-nmap <C-P> :NERDTreeTabsToggle<CR>
-nmap <C-P> :NERDTreeTabsToggle<CR>
-
-" ,p to show current file in the tree
-nmap <leader>p :NERDTreeFind<CR>
-
 " Plugins: nerdcommenter -----------------------------------------------------
 Plug 'scrooloose/nerdcommenter'
 

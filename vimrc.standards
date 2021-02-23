@@ -111,7 +111,7 @@ nmap <C-E> :b#<CR>
 " leader-q to close buffer
 nmap <leader>q :bd<cr>
 
-" Make shift-insert work like in Xterm
+" Make shift-insert work with Right Click
 map <S-Insert> <RightMouse>
 map! <S-Insert> <RightMouse>
 
