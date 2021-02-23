@@ -8,7 +8,21 @@ let g:enable_bold_font = 1
 let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
 
 set termguicolors
+set termguicolors
 set background=dark
+" handling setting and unsetting BAT_THEME for fzf.vim
+augroup update_bat_theme
+    autocmd!
+    autocmd colorscheme * call ToggleBatEnvVar()
+augroup end
+function ToggleBatEnvVar()
+    if (&background == "light")
+        let $BAT_THEME='Monokai Extended Light'
+    else
+        let $BAT_THEME='Monokai Extended Light'
+    endif
+endfunction
+
 colorscheme tokyonight
 let g:tokyonight_style = 'night' " available: night, storm
 
