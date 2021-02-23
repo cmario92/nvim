@@ -88,11 +88,6 @@ let g:NERDDefaultAlign = 'left'
 nmap <leader>/ :call NERDComment(0, "invert")<cr>
 vmap <leader>/ :call NERDComment(0, "invert")<cr>
 
-" Plugins: Ag the silver-sarcher ---------------------------------------------
-Plug 'rking/ag.vim'
-
-nmap <leader>k :Ag<space>
-
 " Plugins: FZF file search ---------------------------------------------------
 if has('unix')
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -248,7 +243,7 @@ nnoremap <silent> <c-w>h :TmuxNavigateLeft<cr>
 " General languages
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'elzr/vim-json'
-let g:vim_json_syntax_conceal = 0
+let g:vim_json_syntax_conceal = 1
 Plug 'tpope/vim-markdown'
 Plug 'irrationalistic/vim-tasks'
 Plug 'tsaleh/vim-tmux'
