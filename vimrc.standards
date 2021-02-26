@@ -107,6 +107,7 @@ nmap <silent> <leader>/ :silent noh<CR>
 
 " Ctrol-E to switch between 2 last buffers
 nmap <C-E> :b#<CR>
+nmap <C-Q> :bnext<CR>
 
 " leader-q to close buffer
 nmap <leader>q :bd<cr>
