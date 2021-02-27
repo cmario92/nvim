@@ -17,21 +17,21 @@ augroup update_bat_theme
 augroup end
 function ToggleBatEnvVar()
     if (&background == "light")
-        let $BAT_THEME='Monokai Extended Light'
+        let $BAT_THEME='embark'
     else
-        let $BAT_THEME='Monokai Extended Light'
+        let $BAT_THEME='embark'
     endif
 endfunction
 
-colorscheme tokyonight
-let g:tokyonight_style = 'night' " available: night, storm
+colorscheme embark
+" let g:tokyonight_style = 'night' " available: night, storm
 
 " Plugin: onehalfdark
 syntax on
 set t_Co=256
 set cursorline
-let g:airline_theme='onehalfdark'
-let g:lightline = { 'colorscheme': 'onehalfdark' }
+let g:airline_theme='embark'
+let g:lightline = { 'colorscheme': 'embark' }
 
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -42,5 +42,5 @@ endif
 set cursorline
 
 " Colour-column to limit myself to 80 characters
-set colorcolumn=80
+set colorcolumn=100
 " highlight ColorColumn ctermbg=0
