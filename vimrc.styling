@@ -42,5 +42,5 @@ endif
 set cursorline
 
 " Colour-column to limit myself to 80 characters
-set colorcolumn=100
+" set colorcolumn=100
 " highlight ColorColumn ctermbg=0
