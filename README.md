@@ -1,4 +1,4 @@
-### Location - `~/.config/nvmi`
+### Location - `~/.config/nvim/`
 
 # Basic NeoVim
 This is a basic Neovim dotfile meant to help you out getting started with
