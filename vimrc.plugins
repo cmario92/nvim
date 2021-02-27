@@ -35,9 +35,7 @@ set noshowmode
 
 " Plugins: Theme
 Plug 'chriskempson/vim-tomorrow-theme'
-
 Plug 'dracula/vim', { 'as': 'dracula' }
-
 Plug 'embark-theme/vim', { 'as': 'embark' }
 
 " Plugins: vim-devicons-------------------------------------------------------
@@ -56,16 +54,6 @@ nmap <C-P> :NERDTreeTabsToggle<CR>
 " ,p to show current file in the tree
 nmap <leader>p :NERDTreeFind<CR>
 
-" Plugins: Indent Guides -----------------------------------------------------
-" Plug 'vim-scripts/Indent-Guides'
-" colorscheme default
-
-" indent-guides settings
-" let g:indent_guides_start_level = 2
-" let g:indent_guides_enable_on_vim_startup = 1
-" let g:indent_guides_guide_size = 1
-" let g:indent_guides_color_change_percent = 5
-
 " Plugins: NerdTree base -----------------------------------------------------
 Plug 'scrooloose/nerdtree'
 
@@ -75,9 +63,33 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Plugins: NerdTree Tabs -----------------------------------------------------
 Plug 'jistr/vim-nerdtree-tabs'
 
- " Plugins: fzf --------------------------------------------------------------
+" Plugins: fzf --------------------------------------------------------------
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
+
+set viminfo='1000
+" floating window size ratio
+let g:fzf_preview_floating_window_rate = 0.8
+
+" fzf command default options
+let g:fzf_preview_default_fzf_options = { '--reverse': v:true, '--preview-window': 'wrap' }
+
+" Add fzf quit mapping
+let g:fzf_preview_quit_map = 1
+
+augroup fzf_preview
+autocmd!
+autocmd User fzf_preview#rpc#initialized call s:fzf_preview_settings() " fzf_preview#remote#initialized or fzf_preview#coc#initialized
+augroup END
+
+function! s:fzf_preview_settings() abort
+let g:fzf_preview_command = 'COLORTERM=truecolor ' . g:fzf_preview_command
+let g:fzf_preview_grep_preview_cmd = 'COLORTERM=truecolor ' . g:fzf_preview_grep_preview_cmd
+endfunction
+
+
+
 " Plugins: nerdcommenter -----------------------------------------------------
 Plug 'scrooloose/nerdcommenter'
 
@@ -90,22 +102,23 @@ vmap <leader>/ :call NERDComment(0, "invert")<cr>
 
 " Plugins: FZF file search ---------------------------------------------------
 if has('unix')
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 endif
 Plug 'junegunn/fzf.vim'
 
-if executable("ag") && ('' == $FZF_DEFAULT_COMMAND)
-  let $FZF_DEFAULT_COMMAND = "ag --follow --nocolor --nogroup -g ''"
-endif
+"if executable("ag") && ('' == $FZF_DEFAULT_COMMAND)
+"  let $FZF_DEFAULT_COMMAND = "ag --follow --nocolor --nogroup -g ''"
+"endif
 
 set rtp+=/usr/local/opt/fzf/
 
 " :Files with preview
-command! FilesP call fzf#vim#files('', fzf#vim#with_preview('right'))
-nmap <leader>, :FilesP<cr>
+" command! FilesP call fzf#vim#files('', fzf#vim#with_preview('right'))
+" nmap <leader>, :FilesP<cr>
+nmap <leader>, :FzfPreviewProjectFilesRpc<cr>
 
 " nnoremap <silent> <Leader>C :call fzf#run({'source':map(split(globpath(&rtp, "colors/*.vim"), "\n"),"substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')"),'sink':    'colo','options': '+m','left':30})<CR>
-let g:fzf_colors = {'fg':['fg', 'Normal'],'bg':['bg', 'Normal'],'hl':['fg', 'Comment'],'fg+':['fg', 'CursorLine', 'CursorColumn', 'Normal'],'bg+':['bg', 'CursorLine', 'CursorColumn'],'hl+': ['fg', 'Statement'],'info': ['fg', 'PreProc'],'border': ['fg', 'Ignore'],'prompt':['fg', 'Conditional'],'pointer': ['fg', 'Exception'],'marker':['fg', 'Keyword'],'spinner': ['fg', 'Label'], 'header':['fg', 'Comment'] }
+" let g:fzf_colors = {'fg':['fg', 'Normal'],'bg':['bg', 'Normal'],'hl':['fg', 'Comment'],'fg+':['fg', 'CursorLine', 'CursorColumn', 'Normal'],'bg+':['bg', 'CursorLine', 'CursorColumn'],'hl+': ['fg', 'Statement'],'info': ['fg', 'PreProc'],'border': ['fg', 'Ignore'],'prompt':['fg', 'Conditional'],'pointer': ['fg', 'Exception'],'marker':['fg', 'Keyword'],'spinner': ['fg', 'Label'], 'header':['fg', 'Comment'] }
 
 " fuzzy-lines
 nmap <leader>l :Lines<cr>
@@ -115,9 +128,13 @@ nmap <leader>t :Tags<cr>
 nmap <localleader>t :BTags<cr>
 
 " fuzzy-buffers
-nmap <leader>b :Buffers<cr>
+" nmap <leader>b :Buffers<cr>
+nmap <leader>b :FzfPreviewBuffersRpc<cr>
+nmap <leader>G :FzfPreviewGitActionsRpc<cr>
+nmap <leader>F :FzfPreviewProjectGrep<space>
+nmap <leader>h :FzfPreviewJumpsRpc<cr>
+nmap <leader>c :FzfPreviewCommandPaletteRpc<cr>
 
-" Plugins: CtrlP (on L) ------------------------------------------------------
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'd11wtq/ctrlp_bdelete.vim'
 
@@ -140,18 +157,18 @@ let g:ctrlp_cmd = 'CtrlP'
 map <c-l> :CtrlP <CR>
 
 " Plugins: Greplace files ----------------------------------------------------
-Plug 'vim-scripts/greplace.vim'
-nmap <leader>Gs :Gsearch<cr>
-nmap <leader>GS :Gbuffersearch<cr>
-nmap <leader>Gr :Greplace<cr>
+" Plug 'vim-scripts/greplace.vim'
+" nmap <leader>Gs :Gsearch<cr>
+" nmap <leader>GS :Gbuffersearch<cr>
+" nmap <leader>Gr :Greplace<cr>
 
 " replace or edit multiple files at once, then use :Greplace to incorporate
 " the changes, followed by :wall to save all modified buffers
 
-if executable("ag")
-  set grepprg=ag
-  let g:grep_cmd_opts = '--line-numbers --noheading'
-endif
+" if executable("ag")
+" set grepprg=ag
+" let g:grep_cmd_opts = '--line-numbers --noheading'
+" endif
 
 " Plugins: Gundo -------------------------------------------------------------
 Plug 'sjl/gundo.vim'
@@ -172,7 +189,7 @@ let g:session_autoload = 'no'
 nmap <leader>SS :SaveSession
 nmap <leader>SO :OpenSession
 if has('gui_running')
-  nmap <leader>SR :RestartVim<CR>
+nmap <leader>SR :RestartVim<CR>
 endif
 
 " Plugins: Vim Switch --------------------------------------------------------
@@ -183,7 +200,7 @@ Plug 'vim-scripts/utl.vim'
 
 " config help: <url:~/.config/nvim/plugged/utl_rc.vim#r=utl_cfg_hdl_scm_http>
 if has("mac")
-  let g:utl_cfg_hdl_scm_http_system = "!open '%u'"
+let g:utl_cfg_hdl_scm_http_system = "!open '%u'"
 end
 
 nmap <leader>o :Utl <space>
@@ -270,19 +287,19 @@ nmap <leader>T :TestFile --format documentation<cr>
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
 let g:coc_global_extensions = [
-  \ 'coc-json', 'coc-pairs', 'coc-eslint',  'coc-tsserver',
-  \ 'coc-html', 'coc-css', 'coc-solargraph', 'coc-yaml', 'coc-emmet',
-  \ 'coc-lists', 'coc-snippets', 'coc-git', 'coc-elixir', 'coc-marketplace',
-  \ 'coc-webpack', 'coc-lua', 'coc-vimlsp', 'coc-docker', 'coc-tslint']
+\ 'coc-json', 'coc-pairs', 'coc-eslint',  'coc-tsserver',
+\ 'coc-html', 'coc-css', 'coc-solargraph', 'coc-yaml', 'coc-emmet',
+\ 'coc-lists', 'coc-snippets', 'coc-git', 'coc-elixir', 'coc-marketplace',
+\ 'coc-webpack', 'coc-lua', 'coc-vimlsp', 'coc-docker', 'coc-tslint']
 
 let g:coc_user_config = {
-  \ "diagnostic.errorSign": '⚠',
-  \ "diagnostic.warningSign": '⚐',
-  \ "diagnostic.infoSign": '⚐',
-  \ "diagnostic.hintSign": '⚐',
-  \ "diagnostic.signOffset": 100,
-  \ "coc.preferences.enableFloatHighlight": v:false,
-  \ }
+\ "diagnostic.errorSign": '⚠',
+\ "diagnostic.warningSign": '⚐',
+\ "diagnostic.infoSign": '⚐',
+\ "diagnostic.hintSign": '⚐',
+\ "diagnostic.signOffset": 100,
+\ "coc.preferences.enableFloatHighlight": v:false,
+\ }
 
 let g:airline#extensions#coc#enabled = 1
 let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)] }'
@@ -311,25 +328,25 @@ set signcolumn=yes
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+    \ pumvisible() ? "\<C-n>" :
+    \ <SID>check_back_space() ? "\<TAB>" :
+    \ coc#refresh()
 
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+let col = col('.') - 1
+return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
+if (index(['vim','help'], &filetype) >= 0)
+  execute 'h '.expand('<cword>')
+else
+  call CocAction('doHover')
+endif
 endfunction
 
 " Remap for rename current word
@@ -364,24 +381,24 @@ hi link ALEWarningSign  Todo
 
 " Dissabled linters (since COC takes care of these)
 let g:ale_linters = {
-  \  'css':        [],
-  \  'javascript': [],
-  \  'typescript': [],
-  \  'json':       [],
-  \  'scss':       [],
-  \  'yaml':       []
-  \ }
+\  'css':        [],
+\  'javascript': [],
+\  'typescript': [],
+\  'json':       [],
+\  'scss':       [],
+\  'yaml':       []
+\ }
 
 " Autofixing
 let g:ale_fixers = {
-  \ '*': ['trim_whitespace', 'remove_trailing_lines'],
-  \ 'javascript': ['eslint'],
-  \ 'typescript': ['eslint', 'tslint'],
-  \ 'ruby': ['rubocop'],
-  \ 'markdown': ['prettier'],
-  \ 'scss': ['stylelint'],
-  \ 'elixir': ['mix_format']
-  \ }
+\ '*': ['trim_whitespace', 'remove_trailing_lines'],
+\ 'javascript': ['eslint'],
+\ 'typescript': ['eslint', 'tslint'],
+\ 'ruby': ['rubocop'],
+\ 'markdown': ['prettier'],
+\ 'scss': ['stylelint'],
+\ 'elixir': ['mix_format']
+\ }
 
 let g:ale_fix_on_save = 1
 
