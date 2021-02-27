@@ -289,8 +289,8 @@ Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 let g:coc_global_extensions = [
 \ 'coc-json', 'coc-pairs', 'coc-eslint',  'coc-tsserver',
 \ 'coc-html', 'coc-css', 'coc-solargraph', 'coc-yaml', 'coc-emmet',
-\ 'coc-lists', 'coc-snippets', 'coc-git', 'coc-elixir', 'coc-marketplace',
-\ 'coc-webpack', 'coc-lua', 'coc-vimlsp', 'coc-docker', 'coc-tslint']
+\ 'coc-lists', 'coc-snippets', 'coc-git', 'coc-marketplace',
+\ 'coc-webpack', 'coc-vimlsp', 'coc-docker']
 
 let g:coc_user_config = {
 \ "diagnostic.errorSign": '⚠',
