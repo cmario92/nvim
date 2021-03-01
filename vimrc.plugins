@@ -4,23 +4,6 @@ let g:plug_timeout=300
 " Start Plug
 call plug#begin('~/.config/nvim/plugged')
 
-" Plugins: Proc.vim shell scripting and file stuff --------------------------
-Plug 'Shougo/vimproc.vim', {'do': 'make'}
-
-" Plugins: Vim Repeat on steroids
-Plug 'tpope/vim-repeat'
-
-" Plugins: Floaterm ---------------------------------------------------------
-Plug 'voldikss/vim-floaterm'
-
-if filereadable(expand("~/.config/nvim/plugged/vim-floaterm/plugin/floaterm.vim"))
-  " Open Floating Window - Lazygit
-  nnoremap <leader>fl :FloatermNew --autoclose=2 --height=0.99 --width=0.99 --wintype=floating lazygit<CR>
-  " Open Floating Window - Empty terminal
-  nnoremap <leader>ft :FloatermNew --autoclose=2 --height=0.75 --width=0.75 --wintype=floating<CR>
-endif
-
-
 " Plugins: Themes ------------------------------------------------------------
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'chriskempson/base16-vim'
@@ -34,7 +17,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 let g:airline_powerline_fonts=0
-let g:airline_theme='base16'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tabs_label = 'NeoVim'
 let g:airline#extensions#tabline#formatter = 'unique_tail'
@@ -104,6 +86,30 @@ function! s:fzf_preview_settings() abort
   let g:fzf_preview_command = 'COLORTERM=truecolor ' . g:fzf_preview_command
   let g:fzf_preview_grep_preview_cmd = 'COLORTERM=truecolor ' . g:fzf_preview_grep_preview_cmd
 endfunction
+
+" Plugins: Proc.vim shell scripting and file stuff --------------------------
+Plug 'Shougo/vimproc.vim', {'do': 'make'}
+
+" Plugins: Vim Repeat on steroids
+Plug 'tpope/vim-repeat'
+
+" Plugins: Floaterm ---------------------------------------------------------
+Plug 'voldikss/vim-floaterm'
+let g:floaterm_wintype = 'float'
+
+" Set floaterm window's background to black
+hi Floaterm guibg=black
+" Set floating window border line color to cyan, and background to orange
+hi FloatermBorder guibg=black guifg=cyan
+hi FloatermNC guibg=gray
+
+
+if filereadable(expand("~/.config/nvim/plugged/vim-floaterm/plugin/floaterm.vim"))
+  " Open Floating Window - Lazygit
+  nnoremap <silent> <leader>fl :FloatermNew --autoclose=2 --guibg=black --height=0.99 --width=0.99 --name=Lazygit --wintype=floating lazygit<CR>
+  " Open Floating Window - Empty terminal
+  nnoremap <leader>ft :FloatermNew --autoclose=2 --height=0.75 --width=0.75 --wintype=float<CR>
+endif
 
 " Plugins: FZF file search ---------------------------------------------------
 if has('unix')

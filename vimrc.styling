@@ -17,22 +17,22 @@ augroup update_bat_theme
 augroup end
 function ToggleBatEnvVar()
     if (&background == "light")
-        let $BAT_THEME='embark'
+        let $BAT_THEME='tokyonight'
     else
-        let $BAT_THEME='embark'
+        let $BAT_THEME='tokyonight'
     endif
 endfunction
 
-colorscheme embark
-" let g:tokyonight_style = 'night' " available: night, storm
+colorscheme tokyonight
+let g:tokyonight_style = 'night' " available: night, storm
 
 " Plugin: onehalfdark
 syntax on
 set t_Co=256
 set cursorline
-let g:airline_theme='embark'
+let g:airline_theme='tokyonight'
 let g:lightline = {
-      \ 'colorscheme': 'embark',
+      \ 'colorscheme': 'tokyonight',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'readonly', 'filename', 'modified', 'method' ] ]
