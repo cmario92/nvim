@@ -29,6 +29,7 @@ set splitright          " split right
 set listchars=tab:▷⋅,trail:·
 set list
 set expandtab
+syntax on
 syntax enable
 " highlight spell errors
 hi SpellErrors guibg=red guifg=black ctermbg=red ctermfg=black
@@ -88,7 +89,8 @@ set foldcolumn=0        " columns for folding
 set foldmethod=syntax
 set foldlevel=9
 set nofoldenable        " dont fold by default "
-
+:noremap ]] /[{}]<CR>  " Find next { or }
+:noremap [[ ?[{}]<CR>  " Find prev { or }
 " concealing
 set concealcursor=
 set conceallevel=2
@@ -181,6 +183,14 @@ inoremap <A-j> <Esc>:m .+1<CR>==gi
 inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
+
+" Folding
+nmap <A-1> :set foldmethod=marker foldmarker={,} foldlevel=1<CR>
+nmap <A-2> :set foldmethod=marker foldmarker={,} foldlevel=2<CR>
+nmap <A-3> :set foldmethod=marker foldmarker={,} foldlevel=3<CR>
+nmap <A-4> :set foldmethod=marker foldmarker={,} foldlevel=4<CR>
+nmap <A-5> :set foldmethod=marker foldmarker={,} foldlevel=5<CR>
+:nnoremap <silent> <leader>1 m`zcVzCzo``
 
 " Lets not talk about that
 iabbrev emacs The OS that shall not be named

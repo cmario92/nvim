@@ -4,7 +4,7 @@ let g:plug_timeout=300
 " Start Plug
 call plug#begin('~/.config/nvim/plugged')
 
-" Plugins: Proc.vim shell scripting  and file stuff --------------------------
+" Plugins: Proc.vim shell scripting and file stuff --------------------------
 Plug 'Shougo/vimproc.vim', {'do': 'make'}
 
 " Plugins: Vim Repeat on steroids
@@ -13,10 +13,13 @@ Plug 'tpope/vim-repeat'
 " Plugins: Floaterm
 Plug 'voldikss/vim-floaterm'
 
-" Plugins: themes
+" Plugins: Themes ------------------------------------------------------------
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'chriskempson/base16-vim'
 Plug 'ghifarit53/tokyonight-vim'
+Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'embark-theme/vim', { 'as': 'embark' }
 
 " Plugins: Airline -----------------------------------------------------------
 Plug 'vim-airline/vim-airline'
@@ -30,15 +33,11 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#show_splits = 0
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tagbar#flags = 'f'  " show full tag hierarchy
 let g:airline#extensions#tabline#show_close_button = 0
 set noshowmode
 
-" Plugins: Theme
-Plug 'chriskempson/vim-tomorrow-theme'
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'embark-theme/vim', { 'as': 'embark' }
-
-" Plugins: vim-devicons-------------------------------------------------------
+" Plugins: vim-devicons ------------------------------------------------------
 Plug 'ryanoasis/vim-devicons'
 " loading the plugin
 let g:webdevicons_enable = 1
@@ -49,19 +48,29 @@ let g:webdevicons_enable_airline_tabline = 1
 " adding to vim-airline's statusline
 let g:webdevicons_enable_airline_statusline = 1
 
+" Plugins: NerdTree base -----------------------------------------------------
+Plug 'scrooloose/nerdtree'
+
 " Ctrl-P to Display the file browser tree
 nmap <C-P> :NERDTreeTabsToggle<CR>
 " ,p to show current file in the tree
 nmap <leader>p :NERDTreeFind<CR>
-
-" Plugins: NerdTree base -----------------------------------------------------
-Plug 'scrooloose/nerdtree'
 
 " Plugins: NerdTree-git ------------------------------------------------------
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Plugins: NerdTree Tabs -----------------------------------------------------
 Plug 'jistr/vim-nerdtree-tabs'
+
+" Plugins: nerdcommenter -----------------------------------------------------
+Plug 'scrooloose/nerdcommenter'
+
+let g:NERDSpaceDelims=1
+let g:NERDDefaultAlign = 'left'
+
+" ,/ to invert comment on the current line/selection
+nmap <leader>/ :call NERDComment(0, "invert")<cr>
+vmap <leader>/ :call NERDComment(0, "invert")<cr>
 
 " Plugins: fzf --------------------------------------------------------------
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -79,26 +88,14 @@ let g:fzf_preview_default_fzf_options = { '--reverse': v:true, '--preview-window
 let g:fzf_preview_quit_map = 1
 
 augroup fzf_preview
-autocmd!
-autocmd User fzf_preview#rpc#initialized call s:fzf_preview_settings() " fzf_preview#remote#initialized or fzf_preview#coc#initialized
+  autocmd!
+  autocmd User fzf_preview#rpc#initialized call s:fzf_preview_settings() " fzf_preview#remote#initialized or fzf_preview#coc#initialized
 augroup END
 
 function! s:fzf_preview_settings() abort
-let g:fzf_preview_command = 'COLORTERM=truecolor ' . g:fzf_preview_command
-let g:fzf_preview_grep_preview_cmd = 'COLORTERM=truecolor ' . g:fzf_preview_grep_preview_cmd
+  let g:fzf_preview_command = 'COLORTERM=truecolor ' . g:fzf_preview_command
+  let g:fzf_preview_grep_preview_cmd = 'COLORTERM=truecolor ' . g:fzf_preview_grep_preview_cmd
 endfunction
-
-
-
-" Plugins: nerdcommenter -----------------------------------------------------
-Plug 'scrooloose/nerdcommenter'
-
-let g:NERDSpaceDelims=1
-let g:NERDDefaultAlign = 'left'
-
-" ,/ to invert comment on the current line/selection
-nmap <leader>/ :call NERDComment(0, "invert")<cr>
-vmap <leader>/ :call NERDComment(0, "invert")<cr>
 
 " Plugins: FZF file search ---------------------------------------------------
 if has('unix')
@@ -394,19 +391,33 @@ let g:ale_fixers = {
 \ '*': ['trim_whitespace', 'remove_trailing_lines'],
 \ 'javascript': ['eslint'],
 \ 'typescript': ['eslint', 'tslint'],
-\ 'ruby': ['rubocop'],
 \ 'markdown': ['prettier'],
 \ 'scss': ['stylelint'],
-\ 'elixir': ['mix_format']
 \ }
 
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 1 " ALE Fixers - Fix on Save
 
 " Airline integration
 let g:airline#extensions#ale#enabled = 1
 let g:ale_statusline_format = ['⚠ %d', '⚠ %d', '']
 let g:ale_echo_msg_error_str = '⚠'
 let g:ale_echo_msg_warning_str = '⚐'
+
+" Plugin: Vista liuchengxu/vista.vim
+Plug 'liuchengxu/vista.vim'
+
+
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+
+set statusline+=%{NearestMethodOrFunction()}
+
+" By default vista.vim never run if you don't call it explicitly.
+"
+" If you want to show the nearest function in your statusline automatically,
+" you can add the following line to your vimrc
+autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 
 " End Plug
 call plug#end()
