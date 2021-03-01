@@ -62,6 +62,13 @@ let g:NERDDefaultAlign = 'left'
 nmap <leader>/ :call NERDComment(0, "invert")<cr>
 vmap <leader>/ :call NERDComment(0, "invert")<cr>
 
+" Plugin: ranger.vim francoiscarbrol/ranger.vim -----------------------------
+Plug 'francoiscabrol/ranger.vim'
+Plug 'rbgrouleff/bclose.vim'
+
+let g:NERDTreeHijackNetrw = 0   " add this line if you use NERDTree
+let g:ranger_replace_netrw = 1  " open ranger when vim open a directory
+
 " Plugins: fzf --------------------------------------------------------------
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
@@ -78,7 +85,7 @@ let g:fzf_preview_quit_map = 1
 
 let g:fzf_preview_command = 'bat --color=always --plain {-1}' " Installed bat
 " Use vim-devicons
-let g:fzf_preview_use_dev_icons = 1 
+let g:fzf_preview_use_dev_icons = 1
 
 augroup fzf_preview
   autocmd!
