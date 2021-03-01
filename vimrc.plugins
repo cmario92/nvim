@@ -70,6 +70,9 @@ Plug 'rbgrouleff/bclose.vim'
 let g:NERDTreeHijackNetrw = 0   " add this line if you use NERDTree
 let g:ranger_replace_netrw = 1  " open ranger when vim open a directory
 
+let g:ranger_map_keys = 0
+map <leader>r :Ranger<CR>
+
 " Plugins: fzf --------------------------------------------------------------
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
