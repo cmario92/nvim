@@ -393,8 +393,8 @@ nmap <silent><leader>M  <Plug>(coc-diagnostic-prev)
 Plug 'w0rp/ale'
 
 " Remaps
-nmap <silent> <C-K> <Plug>(ale_previous_wrap)
-nmap <silent> <C-J> <Plug>(ale_next_wrap)
+nmap <silent> <C-n> <Plug>(ale_previous_wrap)
+nmap <silent> <C-N> <Plug>(ale_next_wrap)
 " Icons
 let g:ale_sign_error = '⚠'
 let g:ale_sign_warning = '⚐'
