@@ -16,7 +16,7 @@ Plug 'embark-theme/vim', { 'as': 'embark' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-let g:airline_powerline_fonts=0
+let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tabs_label = 'NeoVim'
 let g:airline#extensions#tabline#formatter = 'unique_tail'
@@ -64,7 +64,6 @@ vmap <leader>/ :call NERDComment(0, "invert")<cr>
 
 " Plugins: fzf --------------------------------------------------------------
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
 Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
 
 set viminfo='1000
@@ -76,6 +75,10 @@ let g:fzf_preview_default_fzf_options = { '--reverse': v:true, '--preview-window
 
 " Add fzf quit mapping
 let g:fzf_preview_quit_map = 1
+
+let g:fzf_preview_command = 'bat --color=always --plain {-1}' " Installed bat
+" Use vim-devicons
+let g:fzf_preview_use_dev_icons = 1 
 
 augroup fzf_preview
   autocmd!
