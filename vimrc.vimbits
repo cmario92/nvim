@@ -34,10 +34,4 @@ nnoremap <Leader>Yf :let @*=expand("%:t")<cr>:echo "Copied file name to clipboar
 nnoremap <Leader>Yd :let @*=expand("%:h")<cr>:echo "Copied file directory to clipboard"<cr>
 " keep at least  5 lines above/below cursor (when scrolling)
 
-"'' Floatterm ''"
-if filereadable(expand("~/.config/nvim/plugged/vim-floaterm/plugin/floaterm.vim"))
-  nnoremap <leader>fl :FloatermNew --autoclose=2 --height=0.9 --width=0.9 --wintype=floating lazygit<CR>
-  nnoremap <leader>ft :FloatermNew --autoclose=2 --height=0.75 --width=0.75 --wintype=floating<CR>
-endif
-
 set scrolloff=5

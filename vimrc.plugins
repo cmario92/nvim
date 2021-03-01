@@ -10,8 +10,16 @@ Plug 'Shougo/vimproc.vim', {'do': 'make'}
 " Plugins: Vim Repeat on steroids
 Plug 'tpope/vim-repeat'
 
-" Plugins: Floaterm
+" Plugins: Floaterm ---------------------------------------------------------
 Plug 'voldikss/vim-floaterm'
+
+if filereadable(expand("~/.config/nvim/plugged/vim-floaterm/plugin/floaterm.vim"))
+  " Open Floating Window - Lazygit
+  nnoremap <leader>fl :FloatermNew --autoclose=2 --height=0.99 --width=0.99 --wintype=floating lazygit<CR>
+  " Open Floating Window - Empty terminal
+  nnoremap <leader>ft :FloatermNew --autoclose=2 --height=0.75 --width=0.75 --wintype=floating<CR>
+endif
+
 
 " Plugins: Themes ------------------------------------------------------------
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
