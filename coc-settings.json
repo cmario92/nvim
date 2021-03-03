@@ -1,0 +1,4 @@
+{
+  // fix
+  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "scss", "html"]
+}
