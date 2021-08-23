@@ -18,11 +18,11 @@ function ToggleBatEnvVar()
     if (&background == "light")
         let $BAT_THEME='OneHalfDark'
     else
-        let $BAT_THEME='OneHalfDark'
+        let $BAT_THEME='tokyonight'
     endif
 endfunction
 
-colorscheme onehalfdark
+colorscheme tokyonight
 let g:tokyonight_style = 'night' " available: night, storm
 
 " Plugin: onehalfdark
